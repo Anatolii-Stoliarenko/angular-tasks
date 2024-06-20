@@ -10,14 +10,17 @@ import { TasksComponent } from './tasks/tasks.component';
   standalone: true,
   imports: [HeaderComponent, UserComponent, TasksComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  users = DUMMY_USERS
-  selectedUserName?: string
+  users = DUMMY_USERS;
+  selectedUserId: string | undefined;
 
-  selectedUser(id:string){
-    let index = Number(id.slice(1))
-    this.selectedUserName = this.users[index-1].name
+  get selectedUser() {
+    return this.users.find((user) => user.id === this.selectedUserId);
+  }
+
+  onSelectUser(id: string) {
+    this.selectedUserId = id;
   }
 }
